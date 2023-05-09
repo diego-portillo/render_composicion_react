@@ -1,7 +1,7 @@
 import React from "react";
 import './ToDoSearcher.css';
 
-function ToDoSearcher({searchValue, setSearchValue}){
+function ToDoSearcher({searchValue, setSearchValue, loading}){
     const onSearchValueChange = (event)=>{
         setSearchValue(event.target.value)
     }
@@ -11,6 +11,7 @@ function ToDoSearcher({searchValue, setSearchValue}){
         placeholder="Cebolla"
         value={searchValue}
         onChange={onSearchValueChange}
+        disabled={loading}
         />
         );
 }
