@@ -1,11 +1,27 @@
 import React from "react";
-import { withStorageListener } from "./withStorageListener";
+import { useStorageListener } from "./useStorageListener";
+import "./ChangeAlert.css"
 
-function ChangeAlert(show, toggleShow){
+function ChangeAlert({sincronize}){
+    const {show, toggleShow}=useStorageListener(sincronize)
     if (show){
-        return <p>Hubo cambioooos</p>
+        return (
+            <div className="ChangeAlert-bg">
+                <div className="ChangeAlert-container">
+                    <p>HParece que cambiaste tus TODOs en otra pestaña.</p>
+                    <p>Quieres sincronizarlos?</p>
+                    <button
+                        className="TodoForm-button TodoForm-button--add"
+                        onClick={()=>toggleShow(false)}
+                    >
+                        Yes!
+                    </button>
+                </div>
+            </div>
+        )
+    } else {
+        return null
     }
 }
-const ChangeAlertWithStorageListener = withStorageAlert(ChangeAlert)
 
-export {ChangeAlertWithStorageListener}
+export {ChangeAlert}

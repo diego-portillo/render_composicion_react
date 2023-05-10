@@ -4,7 +4,13 @@ import { useLocalStorate } from "./useLocalStorage";
 const TodoContext = React.createContext();
 
 function useTodos(){
-    const {item:todos, saveItem:saveTodos, loading, error} = useLocalStorate('TODOS_V1',[])
+    const {
+      item:todos, 
+      saveItem:saveTodos, 
+      sincronizeItem: sicronizeTodos,
+      loading, 
+      error
+    } = useLocalStorate('TODOS_V1',[])
     const [openModal, setOpenModal] = React.useState(false)
   const [searchValue, setSearchValue]  = React.useState('')
   const completedTodos = todos.filter(todo => !!todo.completed).length
@@ -54,6 +60,7 @@ function useTodos(){
             deleteTodo,
             openModal,
             setOpenModal,
+            sicronizeTodos
         };
 }
 

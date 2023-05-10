@@ -1,6 +1,7 @@
 import React from "react";
 
 function useLocalStorate(itemName, initialValue){
+    const [sincronizedItem, setSincronizedItem] = React.useState(true)
     const [error, setError] = React.useState(false)
     const [loading, setLoading] = React.useState(true)
     const [item, setItem] = React.useState(initialValue)
@@ -18,12 +19,13 @@ function useLocalStorate(itemName, initialValue){
             }
             setItem(parsedItem)
             setLoading(false)
+            setSincronizedItem(true)
         } catch (error) {
             setError(error)
         }
         
-          },5000)
-    }, [])
+          },3000)
+    }, [sincronizedItem])
     
     
     
@@ -38,7 +40,12 @@ function useLocalStorate(itemName, initialValue){
       }
       
     }
-    return {item, saveItem, loading, error}
+
+  const sincronizeItem = ()=>{
+    setLoading(true)
+    setSincronizedItem(false)
+  }
+    return {item, saveItem, loading, error, sincronizeItem}
   }
   
   export{useLocalStorate}
